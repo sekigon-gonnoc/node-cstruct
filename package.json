@@ -20,7 +20,6 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "bn.js": "^4.11.8",
-    "caddress": "^1.0.0"
+    "bn.js": "^4.11.8"
   }
 }
