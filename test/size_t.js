@@ -8,8 +8,8 @@ describe('test size_t', () => {
     const a = new struct.ssize_t()
     const b = new struct.size_t()
 
-    a.$value = '100'
-    b.$value = '100'
+    a.$value = 100
+    b.$value = 100
 
     assert.equal(a.$value.toString(10), '100')
     assert.equal(b.$value.toString(10), '100')
@@ -19,31 +19,31 @@ describe('test size_t', () => {
     const a = new struct.ssize_t()
     const b = new struct.size_t()
 
-    a.$value = '-1'
-    b.$value = '-1'
+    a.$value = -1
+    b.$value = -1
     assert.equal(a.$value.toString(10), '-1')
-    assert.equal(b.$value.toString(10), '18446744073709551615')
+    assert.equal(b.$value.toString(10), (0xffffffff).toString(10))
 
-    a.$value = '18446744073709551615'
-    b.$value = '18446744073709551615'
+    a.$value = 0xffffffff
+    b.$value = 0xffffffff
     assert.equal(a.$value.toString(10), '-1')
-    assert.equal(b.$value.toString(10), '18446744073709551615')
+    assert.equal(b.$value.toString(10), (0xffffffff).toString(10))
   })
 
   it('test buffer', () => {
     const a = new struct.ssize_t()
     const b = new struct.size_t()
 
-    a.$value = '-1'
-    b.$value = '12345678'
+    a.$value = -1
+    b.$value = 12345678
 
     assert.equal(Buffer.compare(
       a.$buffer,
-      Buffer.from('ffffffffffffffff', 'hex')
+      Buffer.from('ffffffff', 'hex')
     ), 0)
     assert.equal(Buffer.compare(
       b.$buffer,
-      Buffer.from('4e61bc0000000000', 'hex')
+      Buffer.from('4e61bc00', 'hex')
     ), 0)
   })
 })

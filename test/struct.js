@@ -117,4 +117,23 @@ describe('test struct', () => {
       Buffer.from('0100000003000000040000000500000002000000', 'hex')
     ) === 0)
   })
+
+  it('test buffer', () => {
+    class MyStruct extends struct.struct {
+      static get fields () {
+        return [
+          [ 'a', struct.char ],
+          [ 'b', struct.char ],
+          [ 'c', struct.char.times(2) ]
+        ]
+      }
+    }
+
+    const s = new MyStruct({ a: 1, b: 2, c: [3, 4] });
+
+    assert(s.$buffer[0] == 1);
+    assert(s.$buffer[1] == 2);
+    assert(s.$buffer[2] == 3);
+    assert(s.$buffer[3] == 4);
+  })
 })
